@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 function Header({ facade }) {
-  console.log(facade.getUserRoles());
+
+  
+
+  
 
   return (
     <ul className="header">
@@ -19,16 +22,14 @@ function Header({ facade }) {
       )}
       <li>
         {facade.hasUserAccess("admin") && (
-          <NavLink activeClassName="active" to="/admin">
+          <NavLink  activeClassName="active" to="/admin">
             Admin
           </NavLink>
         )}
       </li>
-      <li>
-        <NavLink activeClassName="active" to="/zoo">
-          Zoo
-        </NavLink>
-      </li>
+      <div>
+      </div>
+     
     </ul>
   );
 }

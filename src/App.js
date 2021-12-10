@@ -9,6 +9,7 @@ import LoggedIn from "./components/LoggedIn";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NoMatch from "./components/NoMatch";
 import Animal from "./components/Animal";
+import Zoo from "./components/Zoo";
 
 function App({ facade }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,7 +28,9 @@ function App({ facade }) {
 
   return (
     <div>
-      <Header facade={facade} />
+      <Header facade={facade}
+              logout={logout}
+      />
       <Switch>
         <Route exact path="/">
           <Home
@@ -51,12 +54,21 @@ function App({ facade }) {
             <Admin userMessage={userMessage} setUserMessage={setUserMessage} />
           )}
         </Route>
-        <Route>
+
+        <Route path="/animal">
           <Animal setErrorMessage={setErrorMessage} errorMessage={errorMessage} />
         </Route>
+
+        <Route path="/zoo">
+          <Zoo setErrorMessage={setErrorMessage} errorMessage={errorMessage} />
+        </Route>
+
+
         <Route path="*">
           <NoMatch />
         </Route>
+
+        
       </Switch>
     </div>
   );

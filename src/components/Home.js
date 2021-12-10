@@ -1,6 +1,7 @@
 import Login from "./Login";
 import LoggedIn from "./LoggedIn";
 
+
 function Home(props) {
   const {
     loggedIn,
@@ -11,7 +12,7 @@ function Home(props) {
     setLoggedIn,
   } = props;
   return (
-    <div>
+    <div className="center">
       <h4> {errorMessage}</h4>
       {!loggedIn ? (
         <Login login={login} />
@@ -21,9 +22,9 @@ function Home(props) {
             setLoggedIn={setLoggedIn}
             setErrorMessage={setErrorMessage}
           />
-          <button onClick={logout}>Logout</button>
-        </div>
-      )}
+          <button onClick={logout} className="btn btn-danger">Logout</button>
+        </div>)}
+        
     </div>
   );
 }

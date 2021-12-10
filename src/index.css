@@ -39,3 +39,17 @@ ul.header li a:hover:not(.active) {
 .active {
   background-color: #4caf50;
 }
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.headercss {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}

@@ -1,4 +1,5 @@
-const URL = "https://januscphb.dk/tomcat/CA2";
+const URL = "http://localhost:8080/CA2_war_exploded";
+//const URL = "https://januscphb.dk/tomcat/CA2";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -52,7 +53,7 @@ function apiFacade() {
     return fetch(URL + "/api/" + endpoint, options).then(handleHttpErrors);
   };
 
-  const fetchJon = (endpoint, updateAction, SetErrorMessage) => {
+  const fetchGET = (endpoint, updateAction, SetErrorMessage) => {
     const options = makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/" + endpoint, options)
       .then(handleHttpErrors)
@@ -66,6 +67,39 @@ function apiFacade() {
         }
       });
   };
+
+
+  const fetchDELETE = (endpoint, updateAction, SetErrorMessage) => {
+    const options = makeOptions("GET", true); //True add's the token
+    return fetch(URL + "/api/" + endpoint, options)
+      .then(handleHttpErrors)
+      .then((data) => updateAction(data))
+      .catch((err) => {
+        if (err.status) {
+          console.log(err);
+          err.fullError.then((e) => SetErrorMessage(e.code + ": " + e.message));
+        } else {
+          SetErrorMessage("Network error");
+        }
+      });
+  };
+
+const fetchPOST = (endpoint, updateAction, SetErrorMessage, body) =>
+{
+  const options = makeOptions("POST", true, body) //true adds the token
+  return fetch(URL + "/api/" + endpoint, options)
+    .then(handleHttpErrors)
+    .then((data) => updateAction(data))
+      .catch((err) => {
+    if (err.status) {
+      console.log(err);
+      err.fullError.then((e) => SetErrorMessage(e.code + ": " + e.message));
+    } else {
+      SetErrorMessage("Network error");
+    }
+  });
+};
+
 
   const setToken = (token) => {
     localStorage.setItem("jwtToken", token);
@@ -106,7 +140,9 @@ function apiFacade() {
     fetchData,
     getUserRoles,
     hasUserAccess,
-    fetchJon,
+    fetchGET,
+    fetchDELETE,
+    fetchPOST,
   };
 }
 const facade = apiFacade();
